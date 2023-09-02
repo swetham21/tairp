@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> To-Do List</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	   
+    <link rel="stylesheet" href="style9.css">
+</head>
+<body>
+    <section id="home">
+        <h1 class="heading"> To-Do list </h1>
+    </section>
+    <div class="container">
+        <div class="addTask">
+            <input type="text" placeholder="Add a Task">
+            <button>Add</button>
+        </div>
+        <ol class="notCompleted">
+            
+            <h3> Not Completed </h3>
+            
+        </ol>
+
+        <ol class="Completed">
+            <h3> Completed </h3>
+           
+        </ol>
+
+    </div>
+    <script>
+        document.querySelector('.addTask > button').addEventListener('click', addList);
+
+        function addList() {
+            const input = document.querySelector('input');
+            const notCompleted = document.querySelector('.notCompleted');
+
+            if (input.value !== '') {
+                const newLi = document.createElement('li');
+                const checkBtn = document.createElement('button');
+                const delBtn = document.createElement('button');
+
+                checkBtn.innerHTML = '<i class="fa fa-check"></i>';
+                delBtn.innerHTML = '<i class="fa fa-trash"></i>';
+
+                newLi.textContent = input.value;
+                input.value = '';
+
+                newLi.appendChild(checkBtn);
+                newLi.appendChild(delBtn);
+
+                notCompleted.appendChild(newLi);
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('fa-check')) {
+                const task = e.target.parentElement.parentElement;
+                const completed = document.querySelector('.Completed');
+                completed.appendChild(task);
+            }
+
+            if (e.target.classList.contains('fa-trash')) {
+                const task = e.target.parentElement.parentElement;
+                task.remove();
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
